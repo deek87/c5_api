@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: derekcameron
- * Date: 21/12/2017
- * Time: 18:29
- */
+
 
 namespace C5JapanAPI\Methods;
 
@@ -19,14 +14,9 @@ use Concrete\Core\Package\PackageService;
 class GetMethod extends AbstractMethod
 {
 
-    public function test($params = null)
-    {
-        echo 'hi';
-        return new JsonResponse(['message'=>'test was sucessful', 'params'=>$params]);
-
-    }
-
     /**
+     *  function for testing purposes only to be removed later
+     *
      * @return JsonResponse
      */
     public function adminDetails()

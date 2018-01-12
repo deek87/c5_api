@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: derekcameron
- * Date: 09/01/2018
- * Time: 11:44
- */
+
 
 namespace C5JapanAPI\Commands;
 

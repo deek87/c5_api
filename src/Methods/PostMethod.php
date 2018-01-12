@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: derekcameron
- * Date: 21/12/2017
- * Time: 18:30
- */
+
 
 namespace C5JapanAPI\Methods;
 
