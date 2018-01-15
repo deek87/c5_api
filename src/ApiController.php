@@ -16,22 +16,23 @@ class ApiController extends Controller
 
     public function getRoute($method, $action, $params = 0){
         if ($method == 'get') {
-            $this->apiObject = $this->app->make(ApiObject::class, ['requestArray'=>$this->get()]);
+            //Internal Testing only
+            if ($action == 'adminDetails') {
+                $this->apiObject = $this->app->make(ApiObject::class, ['requestArray'=>['client_id'=>'','client_secret'=>'','user_id'=>1,'user'=>1]]);
+            } else {
+                $this->apiObject = $this->app->make(ApiObject::class, ['requestArray'=>$this->get()]);
+            }
+
             $getMethod = $this->app->make(GetMethod::class, ['apiObject'=> $this->apiObject]);
 
             if (method_exists($getMethod, $action)) {
                 return $getMethod->$action($params);
             } else {
-                echo $method;
-                echo ' - ';
-                echo $action;
-                echo '-';
-                echo $params;
                 return new JsonResponse(t('Action Doesn\'t Exist!'), 404);
             }
 
         } elseif ($method == 'post') {
-            $this->apiObject = $this->app->make(ApiObject::class, ['requestArray'=>$this->get()]);
+            $this->apiObject = $this->app->make(ApiObject::class, ['requestArray'=>$this->post()]);
             $postMethod = $this->app->make(PostMethod::class, ['apiObject'=> $this->apiObject]);
             if (method_exists($postMethod, $action)) {
                 return $postMethod->$action($params);

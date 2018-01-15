@@ -34,7 +34,6 @@ class GetMethod extends AbstractMethod
                 'user_id'=>$userID
                 ];
 
-            // $details = 'client_secret='.$details['client_secret'].'&client_id='.$details['client_id'].'&user_id='.$details['user_id'];
             $status = 200;
         } else {
             $status = 401;

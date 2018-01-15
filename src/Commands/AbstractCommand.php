@@ -3,7 +3,7 @@
 namespace C5JapanAPI\Commands;
 
 
-use Concrete\Core\Application\Application;
+use Concrete\Core\Support\Facade\Application;
 
 /**
  * Class AbstractCommand
@@ -26,7 +26,7 @@ abstract class AbstractCommand
     public function __construct($data = [])
     {
         $this->data = $data;
-        $this->app = Application::getInstance();
+        $this->app = Application::getFacadeApplication();
     }
 
     /**

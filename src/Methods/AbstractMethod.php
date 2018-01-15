@@ -4,6 +4,7 @@
 namespace C5JapanAPI\Methods;
 
 use C5JapanAPI\ApiObject;
+use C5JapanAPI\Commands\AbstractCommand;
 use C5JapanAPI\CredentialGenerator;
 use Concrete\Core\Application\Application;
 use Concrete\Core\Application\ApplicationAwareInterface;
@@ -96,6 +97,22 @@ abstract class AbstractMethod implements ApplicationAwareInterface
     public function getApiObject()
     {
         return $this->apiObject;
+    }
+
+    /**
+     * @return \C5JapanAPI\Commands\AbstractCommand
+     */
+    public function getCommand()
+    {
+        return $this->command;
+    }
+
+    /**
+     * @param \C5JapanAPI\Commands\AbstractCommand $command
+     */
+    public function setCommand(AbstractCommand $command)
+    {
+        $this->command = $command;
     }
 
     /**
