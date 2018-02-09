@@ -1,6 +1,6 @@
 <?php
 
-namespace C5JapanAPI;
+namespace C5JapanAPI\Credential;
 
 
 use Concrete\Core\Application\Application;
@@ -123,56 +123,7 @@ class CredentialGenerator implements ApplicationAwareInterface
         }
     }
 
-    /**
-     * @param int $length
-     * @return string
-     */
-    private function getRandomBytes($length = 16)
-    {
-        if (function_exists('random_bytes')) {
-            return random_bytes($length);
-        }
 
-        if (function_exists('openssl_random_pseudo_bytes')) {
-            return openssl_random_pseudo_bytes($length);
-        }
-
-        if (@is_readable('/dev/urandom') &&
-            ($fh = @fopen('/dev/urandom', 'rb'))) {
-            $output = fread($fh, $length);
-            fclose($fh);
-
-            if (strlen($output) === $length) {
-                return $output;
-            }
-        }
-
-        if (function_exists('mcrypt_create_iv')) {
-            $mcryptCheck = @mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
-            if ($mcryptCheck != false) {
-                return $mcryptCheck;
-            }
-
-        }
-
-        if (function_exists('mcrypt_create_iv')) {
-            $mcryptCheck = mcrypt_create_iv($length, MCRYPT_RAND);
-            if ($mcryptCheck != false) {
-                return $mcryptCheck;
-            }
-        }
-
-
-
-        $randomBytes = '';
-        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|":<>?\'\\';
-        $characterLength = strlen($characters);
-        while ($length--) {
-            $randomBytes .= substr($characters, rand(0, $characterLength), 1);
-        }
-
-        return $randomBytes;
-    }
 
     /**
      * @return string

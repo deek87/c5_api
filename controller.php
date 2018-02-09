@@ -6,8 +6,7 @@ use Concrete\Core\Package\Package;
 use Concrete\Core\Page\Page;
 use Concrete\Core\Page\Single as SinglePage;
 use Concrete\Core\Job\Job;
-
-
+use Concrete\Core\Routing\Route;
 
 
 class Controller extends Package
@@ -108,6 +107,8 @@ class Controller extends Package
 
     public function on_start()
     {
+
+
 
         \Route::register('/api/{method}/{action}','\C5JapanAPI\ApiController::getRoute', 'api_entry_point',['method'=>'(get|post|list)']);;
         \Route::register('/api/{method}/{action}/{params}','\C5JapanAPI\ApiController::getRoute', 'api_entry_point_with_params',['method'=>'(get|post)','params'=>'(user|page)\/\d+'], ['params'=>'user/1']);
