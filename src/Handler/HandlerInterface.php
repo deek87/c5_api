@@ -9,17 +9,14 @@
 namespace C5JapanAPI\Handler;
 
 
-use C5JapanAPI\Command\CommandInterface;
 
 interface HandlerInterface
 {
 
-    public function __construct(CommandInterface $command);
+    public function handle();
 
-    function handle();
+    public function getRequestPath();
 
-    public function getRequestData();
-    public function parseRequestData();
 
 
 }

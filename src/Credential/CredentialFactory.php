@@ -24,6 +24,9 @@ use Concrete\Core\User\UserInfoRepository;
  */
 class CredentialFactory
 {
+
+    static protected $service;
+
     /**
      *  Alias for function getByUserID
      *
@@ -85,8 +88,13 @@ class CredentialFactory
      */
     public static function getService() {
 
-        $app = Facade::getFacadeApplication();
-        return $app->make(CredentialService::class);
+        if (self::$service instanceof CredentialService) {
+            return self::$service;
+        } else {
+            $app = Facade::getFacadeApplication();
+            return $app->make(CredentialService::class);
+        }
+
 
     }
 

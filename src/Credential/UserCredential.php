@@ -6,16 +6,24 @@ namespace C5JapanAPI\Credential;
 
 use Concrete\Core\User\UserInfo;
 
+/**
+ * Class UserCredential
+ * @package C5JapanAPI\Credential
+ */
 class UserCredential
 {
 
+    /** @var string */
     protected $token;
+    /** @var UserInfo */
     protected $userInfo;
+    /** @var string */
     protected $userSecret;
+    /** @var string */
     protected $clientID;
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getClientID()
     {
@@ -23,7 +31,7 @@ class UserCredential
     }
 
     /**
-     * @param mixed $clientID
+     * @param $clientID string
      */
     public function setClientID($clientID)
     {
@@ -31,7 +39,7 @@ class UserCredential
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getToken()
     {
@@ -39,7 +47,7 @@ class UserCredential
     }
 
     /**
-     * @param mixed $token
+     * @param $token string
      */
     public function setToken($token)
     {
@@ -55,15 +63,15 @@ class UserCredential
     }
 
     /**
-     * @param UserInfo $userInfo
+     * @param $userInfo UserInfo
      */
-    public function setUserInfo($userInfo)
+    public function setUserInfo(UserInfo $userInfo)
     {
         $this->userInfo = $userInfo;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUserSecret()
     {
@@ -71,7 +79,7 @@ class UserCredential
     }
 
     /**
-     * @param mixed $userSecret
+     * @param $userSecret string
      */
     public function setUserSecret($userSecret)
     {
@@ -79,11 +87,17 @@ class UserCredential
     }
 
     /**
+     * @return string
+     */
+    public function getSecret() {
+        return $this->getUserSecret();
+    }
+
+    /**
      * UserCredential constructor.
-     * @param $userInfo UserInfo
-     * @param $userSecret string
-     * @param $clientID string
-     * @param $token string
+     * @param UserInfo $userInfo
+     * @param string $userSecret
+     * @param string $clientID
      */
     public function __construct(UserInfo $userInfo, $userSecret, $clientID)
     {

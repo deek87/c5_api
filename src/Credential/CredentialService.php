@@ -13,11 +13,16 @@ use Concrete\Core\Application\Application;
 use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\User\UserInfo;
 use Concrete\Core\Package\PackageService;
+use Concrete\Core\User\UserInfoRepository;
 
 class CredentialService implements ApplicationAwareInterface
 {
     use ApplicationAwareTrait;
 
+    /**
+     * CredentialService constructor.
+     * @param Application $app
+     */
     public function __construct(Application $app)
     {
         $this->setApplication($app);
@@ -42,6 +47,8 @@ class CredentialService implements ApplicationAwareInterface
     }
 
     /**
+     * Function used to get the active secret of a User
+     *
      * @return string
      */
     public function getSecret(UserInfo $userInfo)
@@ -57,6 +64,16 @@ class CredentialService implements ApplicationAwareInterface
         return $secret;
     }
 
+    /**
+     * * Function used to get the active secret of a User by User ID
+     *
+     * @param int $userID
+     * @return string
+     */
+    public function getSecretByID($userID = 0) {
+        $userInfo = $this->app->make(UserInfoRepository::class)->getByID((int) $userID);
+        return $this->getSecret($userInfo);
+    }
 
     /**
      * @param UserInfo $userInfo
@@ -88,6 +105,27 @@ class CredentialService implements ApplicationAwareInterface
         $packageConfig->save('api.secret.'.$userInfo->getUserID(), $secret);
 
         return $secret;
+    }
+
+    /** Function used to generate a token
+     * returns an array containing the token and expire time
+     * @return array
+     */
+    public function generateToken(UserInfo $userInfo)
+    {
+        $expires = time() + 360;
+        $token = $this->app->make('token')->generate($this->generateClientID($userInfo) .'-_-' . $expires);
+
+        return ['expires'=>$expires, 'token'=>$token];
+    }
+
+    /** Alias of generate Token
+     *
+     * @see $this->generateToken
+     * @param UserInfo $userInfo
+     */
+    public function getToken(UserInfo $userInfo) {
+        $this->generateToken($userInfo);
     }
 
     /**

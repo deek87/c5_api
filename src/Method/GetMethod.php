@@ -1,7 +1,7 @@
 <?php
 
 
-namespace C5JapanAPI\Methods;
+namespace C5JapanAPI\Method;
 
 use Concrete\Core\Page\Page;
 use Concrete\Core\User\User;

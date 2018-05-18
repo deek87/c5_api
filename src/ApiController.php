@@ -40,12 +40,19 @@ class ApiController extends Controller
                 return new JsonResponse(t('Action Doesn\'t Exist!'), 404);
             }
         } elseif ($method == 'list') {
-            $this->apiObject = $this->app->make(ApiObject::class, ['requestArray'=>$this->get()]);
+            //
+            if (class_exists('\C5JapanAPI\Request\\'.ucfirst(strtolower($action)).'\List'.ucfirst(strtolower($action)) .'Request')) {
+                $request = $this->app->make('\C5JapanAPI\Request\\'.ucfirst(strtolower($action)).'\List'.ucfirst(strtolower($action)) .'Request',[\Request::getInstance()]);
+            } else {
+                return new JsonResponse(t('Method Not Found!'), 404);
+            }
+            dd('\C5JapanAPI\Request\\'.ucfirst(strtolower($action)).'\List'.ucfirst(strtolower($action)) .'Request');
+            //$this->apiObject = $this->app->make(ApiObject::class, ['requestArray'=>$this->get()]);
             $listMethod = $this->app->make(ListMethod::class, ['apiObject'=> $this->apiObject]);
             if (method_exists($listMethod, $action)) {
                 return $listMethod->$action($params);
             } else {
-                return new JsonResponse(t('Action Doesn\'t Exist!'), 404);
+
             }
         }else {
             return new JsonResponse(t('Method Doesn\'t Exist!'), 404);

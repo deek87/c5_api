@@ -56,41 +56,6 @@ class CreateHandler extends AbstractCommandHandler
 
     }
 
-
-    /* Function used to check if the parent/pageType/Template/parent page of the command have been set
-     *
-     */
-    /**
-     *
-     */
-    protected function checkPageRequiredInfo ()
-    {
-
-        if (!is_object($this->command->getParent())) {
-            $this->command->setParent($this->app->make('site')->getSite()->getSiteHomePageObject());
-        }
-
-        if (!is_object($this->command->getParent()) || $this->command->getParent()->isError()) {
-            $this->command->setParent(Page::getByID(HOME_CID));
-        }
-
-        if (!is_object($this->command->getPageType())) {
-
-            $this->command->setPageType($this->command->getParent()->getPageTypeObject());
-            if (!is_object($this->command->getPageType())) {
-                $this->command->setPageType(Type::getByHandle('page'));
-            }
-
-        }
-        if (!is_object($this->command->getPageTemplate())) {
-            if (!is_object($this->command->getPageType())) {
-                $this->command->setPageTemplate($this->command->getParent()->getPageTemplateObject());
-            } else {
-                $this->command->setPageTemplate($this->command->getPageType()->getPageTypeDefaultPageTemplateObject());
-            }
-        }
-    }
-
     /**
      * @param $data array
      * @return mixed
@@ -116,7 +81,6 @@ class CreateHandler extends AbstractCommandHandler
         $data['uID'] = $this->command->getOption('uID');
 
         $this->command->setData($data);
-        $this->checkPageRequiredInfo();
 
 
     }

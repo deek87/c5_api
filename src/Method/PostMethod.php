@@ -1,7 +1,7 @@
 <?php
 
 
-namespace C5JapanAPI\Methods;
+namespace C5JapanAPI\Method;
 
 use C5JapanAPI\Commands\CreatePageCommand;
 use Concrete\Core\Page\Page;

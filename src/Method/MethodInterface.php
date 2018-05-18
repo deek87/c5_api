@@ -1,6 +1,6 @@
 <?php
 
-namespace C5JapanAPI\Methods;
+namespace C5JapanAPI\Method;
 
 
 use C5JapanAPI\Command\CommandInterface;
